@@ -8,13 +8,21 @@ function inputField (id){
     return inputAmount;
 }
 
+function updateTotalField(totalField,currentMoney){
+    const totalFieldAmount = document.getElementById(totalField);
+    const totalFieldMoneyText = totalFieldAmount.innerText;
+    const totalFieldMoney = parseFloat(totalFieldMoneyText);
+    totalFieldAmount.innerText = totalFieldMoney + currentMoney;
+   }
+
 
 //  deposit btn
  document.getElementById('deposit-btn').addEventListener("click",function(){
     const depositAmount = inputField("deposit-input")
-    console.log(depositAmount)
+    updateTotalField("deposit-total",depositAmount)
 });
 // withdraw btn
  document.getElementById("withdraw-btn").addEventListener("click",function(){
    const withdrawAmount = inputField("withdraw-input")
+   updateTotalField("withdraw-total",withdrawAmount)
  })
