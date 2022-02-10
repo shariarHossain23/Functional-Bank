@@ -7,17 +7,24 @@ function inputField (id){
     document.getElementById(id).value = ""
     return inputAmount;
 }
-
+//  update deposit and withdraw
 function updateTotalField(totalField,currentMoney){
     const totalFieldAmount = document.getElementById(totalField);
     const totalFieldMoneyText = totalFieldAmount.innerText;
     const totalFieldMoney = parseFloat(totalFieldMoneyText);
     totalFieldAmount.innerText = totalFieldMoney + currentMoney;
    }
-function updateTotalAmount(currentBalance,isAdd){
+//    total balance
+function getCurrentBalance(){
     const totalBalance = document.getElementById("total-balance");
     const totalBalanceText = totalBalance.innerText;
     const updateBalance = parseFloat(totalBalanceText);
+    return updateBalance
+}
+// total calculation
+function updateTotalAmount(currentBalance,isAdd){
+    const totalBalance = document.getElementById("total-balance");
+    const updateBalance = getCurrentBalance();
     if(isAdd == true){
         totalBalance.innerText = updateBalance + currentBalance
     }
@@ -41,11 +48,12 @@ function updateTotalAmount(currentBalance,isAdd){
 // withdraw btn
  document.getElementById("withdraw-btn").addEventListener("click",function(){
    const withdrawAmount = inputField("withdraw-input")
-    if(withdrawAmount > 0){
+   const amount = getCurrentBalance()
+    if(withdrawAmount > 0 && withdrawAmount < amount ){
         updateTotalField("withdraw-total",withdrawAmount)
         updateTotalAmount(withdrawAmount,false)
     }
     else{
-        alert("plz use positive Number")
+        alert("use positive number or you have not available money right now plz try again")
     }
  })
